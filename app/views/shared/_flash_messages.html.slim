@@ -1,0 +1,18 @@
+<% flash.each do |key, value| %>
+  <div class="container">
+    <div class="col-lg-10 mx-auto">
+      <div class="alert alert-<%= bootstrap_alert(key) %> alert-dismissible fade show text-center shadow">
+        <span><%= value %></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  </div>
+<% end %>
+
+= flash.each do |key, value|
+  div.container
+    div.col-lg-10 mx-auto
+      div.alert.alert-= bootstrao_alert(key).alert-desmissible.fade.show.text-center.shadow
+        span = value
+        button 

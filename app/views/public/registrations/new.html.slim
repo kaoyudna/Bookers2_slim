@@ -8,8 +8,8 @@ h2
     = f.text_field :name, autofocus: true, autocomplete: "name"
   .field
     = f.label :email
-  br
-  = f.email_field :email, autofocus: true, autocomplete: "email"
+    br
+    = f.email_field :email, autofocus: true, autocomplete: "email"
   .field
     = f.label :password
     - if @minimum_password_length
