@@ -1,0 +1,12 @@
+table.table
+  thead
+    tr
+      th
+      th Title
+      th Opinion
+  tbody
+  - books.each do |book|
+    tr
+      td =image_tag book.user.get_profile_image(80,80)
+      td = book.title
+      td = book.body
