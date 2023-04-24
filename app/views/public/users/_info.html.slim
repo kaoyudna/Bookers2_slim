@@ -1,0 +1,11 @@
+= image_tag user.get_profile_image(100,100)
+table.table
+  tr
+    th name
+    th = user.name
+  tr
+    th introduction
+    th = user.introduction
+- if user == current_user
+  = link_to edit_user_path(user), class: 'btn btn-outline-secondary btn-block' do
+    i.fas.fa-user-cog

@@ -1,0 +1,29 @@
+div#error
+  = render 'public/shared/error_messages', resource: @book
+div.container
+  div.row
+    div.col-lg-3
+      div
+        h2 User info
+        = render 'public/users/info', user: @user
+      div.mt-3
+        h2 New book
+        = render 'public/books/form', book: @book_new
+    div.col-lg-8.offset-lg-1
+      h2 Book detail
+      table.table
+        tr
+          td
+            = link_to @book.user do
+              = image_tag @book.user.get_profile_image(100,100)
+              br
+              = @book.user.name
+          td
+            = link_to @book.title
+          td
+            = @book.body
+          - if @book.user == current_user
+            td
+              = link_to "Edit", edit_book_path(@book), class: 'btn btn-success btn-sm'
+            td
+              = link_to 'Delete', book_path(@book), method: :delete, data: {confirm: "削除しますか？"}, class: 'btn btn-danger btn-sm'

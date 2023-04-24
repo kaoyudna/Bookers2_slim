@@ -1,1 +1,3 @@
-$("#music_favorite_<%= @music.id %>").html("<%= j(render 'public/music_favorites/music_favorite_btn', music: @music) %>");
+$("#index").html("<%= j(render 'public/books/index', books: @books) %>");
+$("textarea").val('');
+$("input").val('');

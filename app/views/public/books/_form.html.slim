@@ -1,0 +1,9 @@
+= form_with model: book, local: true do |f|
+  div.form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+  div.form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control'
+  div.form-group
+    = f.submit 'Create Book', class: 'btn btn-success'
