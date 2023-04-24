@@ -1,0 +1,17 @@
+= render 'public/shared/error_messages', resource: @user
+div.container
+  div.row
+    div.col-lg-6.mx-auto
+      h2 User info
+      = form_with model: @user do |f|
+        div.form-group
+          = f.label :name
+          = f.text_field :name, class: 'form-control'
+        div.form-group.d-flex.flex-column
+          = f.label :profile_image
+          = f.file_field :profile_image
+        div.form-group
+          = f.label :introduction
+          = f.text_area :introduction, class: 'form-control'
+        div.form-group
+          = f.submit 'Update User', class: "btn btn-secondary"
