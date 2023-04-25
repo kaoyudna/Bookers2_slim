@@ -1,0 +1,14 @@
+= render 'public/shared/error_messages', resource: @book
+div.container
+  div.row
+    div.col-lg-6.mx-auto
+      h2.text-center Editing Book
+      = form_with model: @book do |f|
+        div.form-group
+          = f.label :title
+          = f.text_field :title, class: "form-control"
+        div.form-group
+          = f.label :body
+          = f.text_area :body, class: "form-control"
+        div.form-group.text-center
+          = f.submit 'Update Book', class: "btn btn-success"
