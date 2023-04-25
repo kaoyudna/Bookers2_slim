@@ -15,7 +15,7 @@ class Public::BooksController < ApplicationController
     if @book.save
       redirect_to books_path
     else
-      render 'error'
+      render 'index'
     end
   end
 
