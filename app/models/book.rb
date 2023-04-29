@@ -6,4 +6,8 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
 
+  def favorited_by?(user)
+    favorites.exists?(user: user)
+  end
+
 end
