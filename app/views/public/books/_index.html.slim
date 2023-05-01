@@ -11,4 +11,4 @@ table.table
       td = image_tag book.user.get_profile_image(80,80)
       td = link_to book.title, book_path(book)
       td = book.body
-      td#favorite_#{book.id} = render 'public/favorites/btn', book: book
+      td = render 'public/favorites/btn', book: book
