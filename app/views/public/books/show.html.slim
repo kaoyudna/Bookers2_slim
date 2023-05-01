@@ -21,6 +21,8 @@ div.container
           td
             = link_to @book.title
           td
+            = render 'public/favorites/btn', book: @book
+          td
             = @book.body
           - if @book.user == current_user
             td
