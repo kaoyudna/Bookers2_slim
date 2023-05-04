@@ -5,6 +5,7 @@ table.table
       th Title
       th Opinion
       th Favorites
+      th Comments
   tbody
   - books.each do |book|
     tr
@@ -12,3 +13,4 @@ table.table
       td = link_to book.title, book_path(book)
       td = book.body
       td = render 'public/favorites/btn', book: book
+      td = book.post_comments.count
