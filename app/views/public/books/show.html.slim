@@ -23,7 +23,7 @@ div.container
           td
             = render 'public/favorites/btn', book: @book
           td
-            | Comments: 
+            | Comments:
             = @book.post_comments.count
           td
             = @book.body
@@ -33,17 +33,9 @@ div.container
             td
               = link_to 'Delete', book_path(@book), method: :delete, data: {confirm: "削除しますか？"}, class: 'btn btn-danger btn-sm'
       h2 Comments
-      table.table
-        - @post_comments.each do |comment|
-          tr
-            td 
-              = link_to comment.user do
-                = image_tag comment.user.get_profile_image(100,100)
-                br
-                = comment.user.name
-            td = comment.comment
-            td = link_to "Delete", book_post_comment_path(@book,comment), method: :delete, class: "btn btn-danger btn-sm"
-      = form_with model: [@book,@post_comment] do |f|
+      div.comments_list
+        = render "public/post_comments/index", post_comments: @post_comments, book: @book
+      = form_with model: [@book,@post_comment], local: false do |f|
         div.form-group
           = f.label :comment
           = f.text_area :comment, class: "form-control"
