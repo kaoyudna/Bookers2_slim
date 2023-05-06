@@ -3,9 +3,9 @@ class Public::PostCommentsController < ApplicationController
   def create
     @post_comment = current_user.post_comments.new(post_comment_params)
     @book = Book.find(params[:book_id])
-    if @post_comment.save
-      @post_comment.book_id = @book.id
-    end
+    @post_comment.save
+    @post_comment.book_id = @book.id
+    redirect_to request.referer
   end
 
   def destroy
