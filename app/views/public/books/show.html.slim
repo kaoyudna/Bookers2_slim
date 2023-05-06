@@ -35,7 +35,7 @@ div.container
       h2 Comments
       div.comments_list
         = render "public/post_comments/index", post_comments: @post_comments, book: @book
-      = form_with model: [@book,@post_comment] do |f|
+      = form_with model: [@book,@post_comment], local: false do |f|
         div.form-group
           = f.label :comment
           = f.text_area :comment, class: "form-control"
