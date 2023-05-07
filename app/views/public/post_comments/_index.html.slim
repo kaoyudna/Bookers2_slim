@@ -1,0 +1,16 @@
+table.table
+  thead
+    tr.bg-light
+      th User
+      th Comment
+      th
+  tbody
+    - post_comments.each do |comment|
+      tr
+        td
+          = link_to comment.user do
+            = image_tag comment.user.get_profile_image(50,50)
+            br
+            = comment.user.name
+        td = comment.comment
+        td = link_to "Delete", book_post_comment_path(book,comment), method: :delete, remote: true, class: "btn btn-danger btn-sm"

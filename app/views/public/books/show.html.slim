@@ -12,40 +12,40 @@ div.container
     div.col-lg-8.offset-lg-1
       h2 Book detail
       table.table
-        tr
-          td
-            = link_to @book.user do
-              = image_tag @book.user.get_profile_image(100,100)
-              br
-              = @book.user.name
-          td
-            = link_to @book.title
-          td
-            = render 'public/favorites/btn', book: @book
-          td
-            | Comments: 
-            = @book.post_comments.count
-          td
-            = @book.body
-          - if @book.user == current_user
-            td
-              = link_to "Edit", edit_book_path(@book), class: 'btn btn-success btn-sm'
-            td
-              = link_to 'Delete', book_path(@book), method: :delete, data: {confirm: "削除しますか？"}, class: 'btn btn-danger btn-sm'
-      h2 Comments
-      table.table
-        - @post_comments.each do |comment|
+        thead
+          tr.bg-light
+            th User
+            th Title
+            th Opinion
+            th Favorites
+            th Comments
+        tbody
           tr
-            td 
-              = link_to comment.user do
-                = image_tag comment.user.get_profile_image(100,100)
+            td
+              = link_to @book.user do
+                = image_tag @book.user.get_profile_image(100,100)
                 br
-                = comment.user.name
-            td = comment.comment
-            td = link_to "Delete", book_post_comment_path(@book,comment), method: :delete, class: "btn btn-danger btn-sm"
-      = form_with model: [@book,@post_comment] do |f|
-        div.form-group
-          = f.label :comment
-          = f.text_area :comment, class: "form-control"
-        div.form-group
-          = f.submit "送信", class: "btn btn-success btn-block"
+                = @book.user.name
+            td
+              = link_to @book.title
+            td
+              = @book.body
+            td class="favorite_#{@book.id}"
+              = render 'public/favorites/btn', book: @book
+            td class="comments_count"
+              = render 'public/post_comments/count', book: @book
+            - if @book.user == current_user
+              td
+                = link_to "Edit", edit_book_path(@book), class: 'btn btn-success btn-sm'
+              td
+                = link_to 'Delete', book_path(@book), method: :delete, data: {confirm: "削除しますか？"}, class: 'btn btn-danger btn-sm'
+      h2 Comments
+      div.comments_list
+        = render "public/post_comments/index", post_comments: @post_comments, book: @book
+      div.card.p-3.bg-light
+        = form_with model: [@book,@post_comment], local: false do |f|
+          div.form-group
+            = f.label :comment
+            = f.text_area :comment, class: "form-control"
+          div.form-group
+            = f.submit "送信", class: "btn btn-success btn-block"
