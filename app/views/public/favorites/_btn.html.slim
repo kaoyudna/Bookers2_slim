@@ -1,8 +1,8 @@
 - if book.favorited_by?(current_user)
-  = link_to book_favorites_path(book), method: :delete, class: "text-danger" do
+  = link_to book_favorites_path(book), method: :delete, remote: true, class: "text-danger" do
     i.fas.fa-heart
     = book.favorites.count
 - else
-  = link_to book_favorites_path(book), method: :post, class: "text-secondary" do
+  = link_to book_favorites_path(book), method: :post, remote: true, class: "text-secondary" do
     i.fas.fa-heart.text-secondary
     = book.favorites.count
