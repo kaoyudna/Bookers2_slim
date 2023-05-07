@@ -1,7 +1,7 @@
 table.table
   - post_comments.each do |comment|
     tr
-      td id="post_comment_#{comment.id}"
+      td
         = link_to comment.user do
           = image_tag comment.user.get_profile_image(100,100)
           br
