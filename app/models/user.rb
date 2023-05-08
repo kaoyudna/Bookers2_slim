@@ -9,9 +9,9 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
 
   has_many :relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
-  has_many :followings, through: :relationships, source: :follower
+  has_many :followings, through: :relationships, source: :followed
   has_many :reverce_of_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
-  has_many :followers, through: :reverce_of_relationships, source: :followed
+  has_many :followers, through: :reverce_of_relationships, source: :follower
 
   has_one_attached :profile_image
 
@@ -31,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def unfollow(user)
-    followings.find(user).destroy
+    relationships.find_by(followed_id: user.id).destroy
   end
 
   def following?(user)
