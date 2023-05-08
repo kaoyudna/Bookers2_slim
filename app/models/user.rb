@@ -7,6 +7,11 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
+  
+  has_many :relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :followers, through: :relationships, source: :follower
+  has_many :reverce_of_relationships, class_name: 'Relationships', foreign_key: 'follower_id', dependent: :destroy
+  has_many :followings, through: :reverce_of_relationships, source: :followed
 
   has_one_attached :profile_image
 
@@ -20,5 +25,9 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_fill: [width, height]).processed
   end
-
+  
+  def self.follow(user)
+    current_user.followings.create(follower_id: user.id)
+  end
+  
 end
