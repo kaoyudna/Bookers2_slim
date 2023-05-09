@@ -16,4 +16,5 @@ table.table
   = link_to edit_user_path(user), class: 'btn btn-outline-secondary btn-block' do
     i.fas.fa-user-cog
 - else
-  = render 'public/relationships/btn', user: user
+  div class="relationships_#{user.id}"
+    = render 'public/relationships/btn', user: user
