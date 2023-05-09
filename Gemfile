@@ -60,3 +60,5 @@ gem 'slim'
 gem 'html2slim'
 
 gem 'devise'
+
+gem 'ransack'
