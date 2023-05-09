@@ -1,0 +1,12 @@
+div.container
+  div.row
+    div.col-lg-3
+      div
+        h2 User info
+        = render 'public/users/info', user: current_user
+      div.mt-3
+        h2 New book
+        = render 'public/books/form', book: @book
+    div.col-lg-8.offset-lg-1
+      h2 Users
+      = render 'public/users/index', users: @followings

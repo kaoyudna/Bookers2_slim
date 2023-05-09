@@ -8,6 +8,11 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
+  has_many :relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+  has_many :followings, through: :relationships, source: :followed
+  has_many :reverce_of_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :followers, through: :reverce_of_relationships, source: :follower
+
   has_one_attached :profile_image
 
   validates :name, presence: true
@@ -19,6 +24,18 @@ class User < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_fill: [width, height]).processed
+  end
+
+  def follow(user)
+    relationships.create(followed_id: user.id)
+  end
+
+  def unfollow(user)
+    relationships.find_by(followed_id: user.id).destroy
+  end
+
+  def following?(user)
+    followings.include?(user)
   end
 
 end
