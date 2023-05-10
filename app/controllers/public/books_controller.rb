@@ -1,10 +1,8 @@
 class Public::BooksController < ApplicationController
 
   def index
-    @q = Book.ransack(params[:q])
-    @books = @q.result(distinct: true)
+    @books = Book.all
     @book = Book.new
-
   end
 
   def new
