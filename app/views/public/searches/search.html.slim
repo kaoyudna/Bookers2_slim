@@ -1,5 +1,11 @@
 div.container
   div.row
     div.col-lg-8.mx-auto
-      
-    
+      - if @record.present?
+        - if @model == 'user'
+          = render 'public/users/index', users: @record
+        - else
+          = render 'public/books/index', books: @record
+      - else
+        h3.text-center.font-weight-bold.pt-5
+          | No results

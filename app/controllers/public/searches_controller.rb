@@ -3,11 +3,11 @@ class Public::SearchesController < ApplicationController
   def search
     @model = params[:model]
     if @model == 'user'
-      @q = User.ransack(params[:q])
-      @record = @q.record(distinct: true)
+      @q = User.ransack(name_cont: params[:q])
+      @record = @q.result
     elsif @model == 'book'
-      @q = Book.ransack(params[:q])
-      @record = @q.record(distinct: true)
+      @q = Book.ransack(title_or_body_cont: params[:q])
+      @record = @q.result
     end
   end
 
