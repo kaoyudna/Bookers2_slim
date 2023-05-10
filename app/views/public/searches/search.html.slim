@@ -1,6 +1,6 @@
 div.container
   div.row
-    div.col-lg-8.mx-auto
+    div.col-lg-8.mx-auto.text-center
       - if @record.present?
         - if @model == 'user'
           = render 'public/users/index', users: @record
@@ -9,3 +9,4 @@ div.container
       - else
         h3.text-center.font-weight-bold.pt-5
           | No results
+      = link_to '戻る', request.referer, class: "btn btn-info mx-auto"
