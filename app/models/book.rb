@@ -11,4 +11,12 @@ class Book < ApplicationRecord
     favorites.exists?(user: user)
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["id", "title", "body", "created_at",  "updated_at", "user_id"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["favorites", "post_comments", "user"]
+  end
+
 end
