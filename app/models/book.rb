@@ -19,4 +19,15 @@ class Book < ApplicationRecord
     ["favorites", "post_comments", "user"]
   end
 
+  def self.sort(selection)
+    case selection
+    when 'new'
+      return all.order(created_at: :DESC)
+    when 'old'
+      return all.order(created_at: :ASC)
+    else
+      return all
+    end
+  end
+
 end
