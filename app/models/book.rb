@@ -1,7 +1,9 @@
 class Book < ApplicationRecord
 
+
   belongs_to :user
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
   has_many :post_comments, dependent: :destroy
 
   validates :title, presence: true
@@ -26,9 +28,9 @@ class Book < ApplicationRecord
     when 'old'
       return all.order(created_at: :ASC)
     when 'likes'
-      return find(Favorite.group(:post_id).order(Arel.sql('count(post_id) desc')).pluck(:post_id))
+      return includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
     else
-      return all
+      return default_scope -> { order(created_at: :desc) }
     end
   end
 
