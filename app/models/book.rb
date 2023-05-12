@@ -25,6 +25,8 @@ class Book < ApplicationRecord
       return all.order(created_at: :DESC)
     when 'old'
       return all.order(created_at: :ASC)
+    when 'likes'
+      return find(Favorite.group(:post_id).order(Arel.sql('count(post_id) desc')).pluck(:post_id))
     else
       return all
     end
