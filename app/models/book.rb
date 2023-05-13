@@ -30,7 +30,7 @@ class Book < ApplicationRecord
     when 'likes'
       return includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
     else
-      return default_scope -> { order(created_at: :desc) }
+      return all.order(created_at: :DESC)
     end
   end
 
