@@ -10,5 +10,6 @@ div.container
         h2 New book
         = render 'public/books/form', book: @book
     div.col-lg-8.offset-lg-1
+      = render 'public/books/sort'
       h2 Books
       = render 'public/books/index', books: @books

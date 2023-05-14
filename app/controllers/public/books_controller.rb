@@ -1,7 +1,8 @@
 class Public::BooksController < ApplicationController
 
   def index
-    @books = Book.all
+    selection = params[:keyword]
+    @books = Book.sort(selection)
     @book = Book.new
   end
 

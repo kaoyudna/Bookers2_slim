@@ -1,7 +1,9 @@
 class Book < ApplicationRecord
 
+
   belongs_to :user
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
   has_many :post_comments, dependent: :destroy
 
   validates :title, presence: true
@@ -17,6 +19,19 @@ class Book < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["favorites", "post_comments", "user"]
+  end
+
+  def self.sort(selection)
+    case selection
+    when 'new'
+      return all.order(created_at: :DESC)
+    when 'old'
+      return all.order(created_at: :ASC)
+    when 'likes'
+      return includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+    else
+      return all.order(created_at: :DESC)
+    end
   end
 
 end
